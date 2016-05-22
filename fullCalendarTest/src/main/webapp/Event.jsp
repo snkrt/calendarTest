@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>EventForm</title>
 
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
 <style type="text/css">
@@ -86,7 +86,9 @@
 
 <script type="text/javascript" src="js/jquery.form.min.js">
 	
-	$(function(){ 
+	$(document).ready(function(){ 
+		
+		
 	    $(".datepicker").datepicker();//调用日历选择器 
 	    $("#isallday").click(function(){//是否是全天事件 
 	        if($("#sel_start").css("display")=="none"){ 
@@ -104,7 +106,19 @@
 	        } 
 	        $.fancybox.resize();//调整高度自适应 
 	    }); 
+	    
+	    $("#del_event").click(function(){ 
+	        if(confirm("您确定要删除吗？")){ 
+	            var eventid = <%=request.getParameter("id")%>; 
+	            
+	            $.get("AddEditEvent?action=del&id="+eventid,function(msg){ 
+	               
+	                    $.fancybox.close(); 
+	                    $('#calendar').fullCalendar('refetchEvents'); 
+        }); 
+     }     
 	});
+	    
 	
 	$(function(){ 
 	    //提交表单 
@@ -123,6 +137,9 @@
 	    } 
 	} 
 	 
+	
+	
+	
 	function showResponse(responseText, statusText, xhr, $form){ 
 	    if(statusText=="success"){     
 	        if(responseText==1){ 
@@ -136,6 +153,7 @@
 	    } 
 	} 
 	
+	});
 </script> 
 
 </head>
@@ -177,7 +195,24 @@
 			</p> -->
 			<div class="sub_btn">
 				<span class="del">
-				<input type="button" class="btn btn_del"id="del_event" value="删除"></span> 
+				<input type="button" class="btn btn_del" id="del_event" value="刪除"  onclick="del()"></span> 
+				<script type="text/javascript">
+				function del(){
+				
+		        if(confirm("您確定要删除吗？")){ 
+		            var eventid = <%=request.getParameter("id")%>; 
+		            
+		            $.get("AddEditEvent?action=del&id="+eventid,function(msg){ 
+		               
+		                    $.fancybox.close(); 
+		                    $('#calendar').fullCalendar('refetchEvents'); //重新获取所有事件数据 
+		                   /*  if(msg==1){//删除成功 
+		                }else{ 
+		                    alert(msg);     
+		                }  */
+		            }); 
+		        } }
+				</script>
 				<input type="submit" class="btn btn_ok" value="確定">
 				<!-- <input type="button" class="btn btn_cancel" value="取消" onClick="$.fancybox.close()"> -->
 			</div>

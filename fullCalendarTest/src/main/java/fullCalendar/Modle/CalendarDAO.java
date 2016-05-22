@@ -55,8 +55,10 @@ public class CalendarDAO implements ICalendarDAO {
 	public void delete(Integer id) throws SQLException {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
+			System.out.println("--------------del");
 			session.beginTransaction();
 			CalendarDTO ctd = (CalendarDTO) session.get(CalendarDTO.class, id);
+			System.out.println("ctd = " + ctd.id);
 			session.delete(ctd);
 			session.getTransaction().commit();	
 		} catch (RuntimeException ex) {

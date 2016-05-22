@@ -66,15 +66,16 @@ $(document).ready(function() {
      			            console.log(selDate);
     			            $.fancybox({//调用fancybox弹出层 
     			                'type':'ajax', 
-    			                'href':'AddEditEvent.jsp?action=add&start='+start+'&end='+end //	
+    			                'href':'Event.jsp?action=add&start='+start+'&end='+end //	
     			            });  
     			            
     			        },
     			
     			eventClick: function(calEvent, jsEvent, view) {
+    				console.log(calEvent.id);
     						$.fancybox({
     							'type':'ajax',
-    							'href':'AddEditEvent.jsp?action=edit&id='+calEvent.id
+    							'href':'Event.jsp?action=edit&id='+calEvent.id
     						});
     			 		},
     				
