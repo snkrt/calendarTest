@@ -1,0 +1,21 @@
+drop table calendar;
+
+truncate table calendar;
+
+create table calendar(
+id         int NOT NULL   PRIMARY KEY  identity, 
+title      varchar(100) NOT NULL, 
+starttime  date NOT NULL, 
+endtime    date  NULL, 
+color      varchar(20),
+constr varchar(25) DEFAULT 'rendering:"background"'
+);
+
+
+
+--DEMO
+
+insert into  calendar (title,starttime,endtime,color) values ('test1', '2016-05-27 05:00:00' , '2016-05-28' , 'GREEN');
+insert into  calendar (title,starttime,endtime,color) values ('test2', '2016-05-28 05:00:00' , '2016-05-28', 'RED');
+insert into  calendar (title,starttime,endtime,color) values ('test3', '2016-05-17 05:00:00' , '2016-05-19',  'BLUE');
+insert into  calendar (title,starttime,endtime,color) values ('test4', '2016-05-7 05:00:00' , '2016-05-10',  'BLOCK');
